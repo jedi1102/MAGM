@@ -4,10 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Prueba para Teams</title>
+    <script src="https://res.cdn.office.net/teams-js/v2.0.0/js/MicrosoftTeams.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        .notification {
+            padding: 10px;
+            background-color: #0078D4;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a la página de prueba para Microsoft Teams</h1>
-    <p>Esta es una página de ejemplo para pruebas de integración en Teams.</p>
+    <div class="container">
+        <h1>Bienvenido a la página de prueba para Microsoft Teams</h1>
+        <p id="userInfo">Cargando información del usuario...</p>
+    </div>
+    <div class="notification">
+        Notificación: ¡Esto es solo una prueba en Microsoft Teams!
+    </div>
+    <iframe src="https://jedi1102.github.io/pagina-de-prueba/" width="100%" height="500px" style="border: none;"></iframe>
+
+    <script>
+        // Inicializar el Teams JavaScript SDK
+        microsoftTeams.initialize();
+
+        // Obtener información del usuario activo
+        microsoftTeams.getContext((context) => {
+            const userName = context.userPrincipalName || "Usuario desconocido";
+            document.getElementById("userInfo").innerText = `Usuario activo: ${userName}`;
+        });
+
+        // Simular una notificación en Teams
+        setTimeout(() => {
+            alert("Notificación simulada: ¡Prueba en Teams completada!");
+        }, 3000);
+    </script>
 </body>
 </html>
-
