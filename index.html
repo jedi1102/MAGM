@@ -19,6 +19,7 @@
             color: white;
             border-radius: 5px;
             text-align: center;
+            display: none;
         }
     </style>
 </head>
@@ -27,8 +28,8 @@
         <h1>Usuario Activo y Notificaciones</h1>
         <p id="userInfo">Cargando información del usuario...</p>
     </div>
-    <div class="notification">
-        Notificación: ¡Esto es una prueba en Microsoft Teams!
+    <div class="notification" id="notification">
+        Notificación simulada: ¡Prueba en Teams completada!
     </div>
 
     <script>
@@ -37,13 +38,17 @@
 
         // Obtener información del usuario activo
         microsoftTeams.getContext((context) => {
-            const userName = context.userPrincipalName || "Usuario desconocido";
-            document.getElementById("userInfo").innerText = `Usuario activo: ${userName}`;
+            if (context && context.userPrincipalName) {
+                document.getElementById("userInfo").innerText = `Usuario activo: ${context.userPrincipalName}`;
+            } else {
+                document.getElementById("userInfo").innerText = "No se pudo obtener información del usuario.";
+            }
         });
 
         // Simular una notificación en Teams
         setTimeout(() => {
-            alert("Notificación simulada: ¡Prueba en Teams completada!");
+            const notification = document.getElementById("notification");
+            notification.style.display = "block";
         }, 3000);
     </script>
 </body>
