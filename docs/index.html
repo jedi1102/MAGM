@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario y Notificaciones</title>
+    <script src="https://res.cdn.office.net/teams-js/v2.0.0/js/MicrosoftTeams.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        .notification {
+            padding: 10px;
+            background-color: #0078D4;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Usuario Activo y Notificaciones</h1>
+        <p id="userInfo">Cargando información del usuario...</p>
+    </div>
+    <div class="notification" id="notification">
+        Notificación simulada: ¡Prueba en Teams completada!
+    </div>
+
+    <script>
+        // Inicializar el Teams JavaScript SDK
+        microsoftTeams.initialize();
+
+        // Obtener información del usuario activo
+        microsoftTeams.getContext((context) => {
+            if (context && context.userPrincipalName) {
+                document.getElementById("userInfo").innerText = `Usuario activo: ${context.userPrincipalName}`;
+            } else {
+                document.getElementById("userInfo").innerText = "No se pudo obtener información del usuario.";
+            }
+        });
+
+        // Simular una notificación en Teams
+        setTimeout(() => {
+            const notification = document.getElementById("notification");
+            notification.style.display = "block";
+        }, 3000);
+    </script>
+</body>
+</html>
